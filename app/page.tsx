@@ -1,103 +1,197 @@
+'use client'
 import Image from "next/image";
-
+// import {Avatar} from '@/components/ui/avatar'
+import {motion} from 'framer-motion'
+import {Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { useEffect, useState ,useRef} from "react";
+import InfiniteCarousel from "@/components/InfiniteCarousel";
+import { Skeleton } from "@/components/ui/skeleton";
+import BubbleHoverButton from "@/components/BubbleWrapper";
+import BubbleWrapper from "@/components/BubbleWrapper";
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const fullText = "Welcome to my Portfolio!"
+  const [welcome,setWelcome] = useState("")
+  const [index, setIndex] = useState(0);
+  const projects = [
+    {
+      name: "Dempa",
+      src: "/dempa.png",
+      desc: "",
+      srcAlt: "dempa logo",
+      techStacks: ["nextjs", "supabase", "reactjs",'expressjs','nodejs','git','github','tailwindcss'],
+    },
+    {
+      name: "Ypiresia Jireh",
+      src: "/yj.png",
+      desc: "",
+      srcAlt: "yj logo",
+      techStacks: ["nextjs", "mongodb", "reactjs",'tailwindcss'],
+    },
+    {
+      name: "The Sideshop",
+      src: "/sideshop.png",
+      desc: "",
+      srcAlt: "sideshop logo",
+      techStacks: ["nextjs", "mysql", "reactjs"],
+    },
+    {
+      name: "Bloo's Tales",
+      src: "/bloo.png",
+      desc: "",
+      srcAlt: "bloo",
+      techStacks: ["csharp"],
+    },
+    {
+      name: "Stratify",
+      src: "/bpi.png",
+      desc: "",
+      srcAlt: "stratify",
+      techStacks: ["nextjs", "mongodb", "reactjs"],
+    },
+    {
+      name: "Likagi",
+      src: "/likagi.png",
+      desc: "",
+      srcAlt: "likagi",
+      techStacks: ["vue"],
+    },
+    {
+      name: "Kaboom",
+      src: "/kaboom.png",
+      desc: "",
+      srcAlt: "kaboom",
+      techStacks: ["javascript"],
+    },
+  ];
+
+  const orgs = [
+    { name: "Adamson Computer Science Society",role:"Logistics Director", src: "acomss.jpg" },
+    { name: "Amazon Web Services Cloud Club Philippines", role:"Technology Department Frontend Developer",src: "awscc.jpg" },
+  ];
+
+
+  useEffect(() => {
+    if (index < fullText.length) {
+      console.log("index:", index, "length:", welcome.length);
+      const timeout = setTimeout(() => {
+        setWelcome((prev) => prev + fullText[index] + "");
+        setIndex(index + 1);
+      }, 200);
+      return () => clearTimeout(timeout);
+    }
+  }, [index, fullText]);
+
+  return (
+    <div className="bg-slate-900 flex items-center justify-center h-full flex-col">
+      <Avatar className="w-24 sm:w-40 md:w-80 xl:w-80 m-5 aspect-square flex items-center justify-center">
+        <AvatarImage
+          src="/images/self.jpg"
+          className="rounded-full"
+        ></AvatarImage>
+        <AvatarFallback className="w-full h-full p-0 flex items-center justify-center">
+          <Skeleton className="w-full h-full rounded-full bg-white" />
+        </AvatarFallback>
+      </Avatar>
+      <h1 className="2xl:text-9xl text-lalezar text-white">
+        {welcome.substring(0, index)}
+        {index < fullText.length && (
+          <motion.span
+            className="inline-block w-[0.6ch] text-white text-center"
+            animate={{ opacity: [0, 1] }}
+            transition={{
+              duration: 0.2, // lower = faster blink
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            _
+          </motion.span>
+        )}
+      </h1>
+      <h1 className="text-white font-lalezar  text-3xl sm:text-5xl 2xl:text-9xl text-center">
+        MIGUEL JOHN CAACBAY
+      </h1>
+      <h2 className="text-white font-lalezar text-2xl sm:text-4xl 2xl:text-8xl text-center">
+        FULL STACK DEVELOPER
+      </h2>
+      {/* <BubbleHoverButton /> */}
+      <div className="w-full bg-sky-800 py-2 my-2">
+        <h3 className=" text-white 2xl:text-3xl font-lalezar">
+          TECHNOLOGIES AND FRAMEWORKS
+        </h3>
+        {/* <h1 style={{ fontFamily: "Lalezar, cursive" }}>Does this work?</h1> */}
+      </div>
+      <InfiniteCarousel />
+
+      <div className="w-full bg-sky-800 py-2 my-2">
+        <h3 className=" text-white 2xl:text-3xl font-lalezar">PROJECTS</h3>
+        {/* <h1 style={{ fontFamily: "Lalezar, cursive" }}>Does this work?</h1> */}
+      </div>
+
+      <div className="flex flex-wrap w-full gap-4 items-center justify-center m-5">
+        {projects.map((project, index) => {
+          return (
+            <BubbleWrapper key={index} stacks={project.techStacks}>
+              <div className="flex bg-white border-9 border-sky-800 rounded-2xl h-40 w-full sm:w-3/4 md:w-[500px] overflow-hidden hover:cursor-pointer hover:scale-105 transition-all hover:text-sky-500 hover:border-2 duration-300">
+                <motion.div
+                  className="relative min-h w-20 md:w-32 md:h-32 flex items-center justify-center h-full my-auto rounded-full overflow-hidden m-2"
+                  initial={{ x: -100 }}
+                  animate={{ x: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    ease: "easeOut",
+                  }}
+                >
+                  <Image
+                    src={`/images/projects${project.src}`}
+                    alt={project.srcAlt}
+                    fill
+                    className="object-contain"
+                  />
+                </motion.div>
+
+                <div className="flex items-center justify-center flex-1 border-2 border-sky-800 m-2 rounded-2xl font-lalezar">
+                  <h2 className="2xl:text-5xl">{project.name}</h2>
+                </div>
+              </div>
+            </BubbleWrapper>
+          );
+        })}
+      </div>
+
+      <div className="w-full bg-sky-800 py-2 my-2">
+        <h3 className=" text-white 2xl:text-3xl font-lalezar">
+          ORGANIZATIONAL EXPERIENCE
+        </h3>
+      </div>
+      <div className="flex">
+        {orgs.map((org, index) => {
+          return (
+            <div
+              className="bg-white w-[40vw] h-40 border-8 gap-3 m-5 flex items-center border-sky-800"
+              key={index}
+            >
+              <motion.div className="relative h-32 w-32 rounded-full overflow-hidden">
+                <Image
+                  src={`/images/orgs/${org.src}`}
+                  alt="asdasd"
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+              <span className="flex-1">
+                <h3 className="font-lalezar text-5xl">{org.name}</h3>
+                <h4 className="">{org.role}</h4>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="w-full bg-sky-800 py-2 my-2">
+        <h3 className=" text-white 2xl:text-3xl font-lalezar">LINKS & CONTACTS</h3>
+        {/* <h1 style={{ fontFamily: "Lalezar, cursive" }}>Does this work?</h1> */}
+      </div>
     </div>
   );
 }
