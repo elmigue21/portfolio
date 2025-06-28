@@ -79,7 +79,7 @@ export default function BubbleWrapper({
                   }
             }
           >
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
+
               <Image
                 src={`/images/techstack/${bubble.stack}.${bubble.extension}`}
                 alt={bubble.alt}
@@ -87,7 +87,6 @@ export default function BubbleWrapper({
                 className="object-contain"
                 // sizes="(max-width: 640px) 6rem, (max-width: 768px) 8rem, 10rem"
               />
-            </div>
           </motion.div>
         );
       })}
