@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import { Lalezar } from "next/font/google";
-import Head from "next/head";
+// import Head from "next/head";
 import "./globals.css";
 
 

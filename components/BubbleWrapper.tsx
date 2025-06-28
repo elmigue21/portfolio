@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { useState, useRef, useLayoutEffect } from "react";
 import { getStackExtension } from "@/app/helpers/getStackExtension";
+import Image from "next/image";
 
-const techBubbles = [
-  { src: "reactjs", alt: "React" },
-  { src: "nextjs", alt: "Next.js" },
-  { src: "nodejs", alt: "Node.js" },
-  { src: "reactjs.", alt: "React" },
-  { src: "nextjs", alt: "Next.js" },
-  { src: "nodejs", alt: "Node.js" },
-];
+// const techBubbles = [
+//   { src: "reactjs", alt: "React" },
+//   { src: "nextjs", alt: "Next.js" },
+//   { src: "nodejs", alt: "Node.js" },
+//   { src: "reactjs.", alt: "React" },
+//   { src: "nextjs", alt: "Next.js" },
+//   { src: "nodejs", alt: "Node.js" },
+// ];
 
 export default function BubbleWrapper({
   children,stacks
@@ -45,7 +46,7 @@ export default function BubbleWrapper({
       {stackValues.map((bubble, i) => {
         const total = stackValues.length;
         const middle = Math.floor(total / 2);
-        const offset = (i - (techBubbles.length - 1) / 2) * 60;
+        // const offset = (i - (techBubbles.length - 1) / 2) * 60;
 
         return (
           <motion.div
@@ -58,7 +59,7 @@ export default function BubbleWrapper({
                 ? {
                     opacity: 1,
                     scale: 2,
-                    x: (i- middle )* 70,
+                    x: (i - middle) * 70,
                     y: TARGET_Y,
                     transition: {
                       // delay: i * 0.1,
@@ -78,11 +79,15 @@ export default function BubbleWrapper({
                   }
             }
           >
-            <img
-              src={`/images/techstack/${bubble.stack}.${bubble.extension}`}
-              alt={bubble.alt}
-              className="w-full h-full object-contain"
-            />
+            <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40">
+              <Image
+                src={`/images/techstack/${bubble.stack}.${bubble.extension}`}
+                alt={bubble.alt}
+                fill
+                className="object-contain"
+                // sizes="(max-width: 640px) 6rem, (max-width: 768px) 8rem, 10rem"
+              />
+            </div>
           </motion.div>
         );
       })}

@@ -3,10 +3,10 @@ import Image from "next/image";
 // import {Avatar} from '@/components/ui/avatar'
 import {motion} from 'framer-motion'
 import {Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { useEffect, useState ,useRef} from "react";
+import { useEffect, useState /* ,useRef */} from "react";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Skeleton } from "@/components/ui/skeleton";
-import BubbleHoverButton from "@/components/BubbleWrapper";
+// import BubbleHoverButton from "@/components/BubbleWrapper";
 import BubbleWrapper from "@/components/BubbleWrapper";
 export default function Home() {
 
@@ -80,7 +80,7 @@ export default function Home() {
       }, 200);
       return () => clearTimeout(timeout);
     }
-  }, [index, fullText]);
+  }, [index, fullText, welcome.length]);
 
   return (
     <div className="bg-slate-900 flex items-center justify-center h-full flex-col">
@@ -192,6 +192,8 @@ export default function Home() {
         <h3 className=" text-white 2xl:text-3xl font-lalezar">LINKS & CONTACTS</h3>
         {/* <h1 style={{ fontFamily: "Lalezar, cursive" }}>Does this work?</h1> */}
       </div>
+
+      
     </div>
   );
 }
