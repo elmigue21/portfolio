@@ -22,11 +22,11 @@ const ChatScreen = () => {
   // const [messageCount , setMessageCount] = useState(0);
 
  const chatRef = useRef(null);
-  const scrollToBottom = () => {
-    if (chatRef.current) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
-    }
-  };
+  // const scrollToBottom = () => {
+  //   if (chatRef.current) {
+  //     chatRef.current.scrollTop = chatRef.current.scrollHeight;
+  //   }
+  // };
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
@@ -98,7 +98,7 @@ const ChatScreen = () => {
         console.log("Streamed chunk:", chunk); // <- here’s your partial AI output
       }
       setStreaming(false);
-      scrollToBottom();
+      // scrollToBottom();
     } catch (e) {
       console.error(e);
       //  addMessage({
@@ -180,7 +180,7 @@ const ChatScreen = () => {
           }
 
           appendToLastMessage(chunk);
-          scrollToBottom();
+          // scrollToBottom();
           console.log("Streamed chunk:", chunk);
         }
       } catch (e) {
@@ -192,6 +192,7 @@ const ChatScreen = () => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
