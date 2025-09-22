@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Lalezar } from "next/font/google";
 // import Head from "next/head";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 
 export const metadata: Metadata = {
@@ -23,7 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={lalezar.variable}>
-      <body>{children}</body>
+      <body className="w-full">
+        {children}
+        <Toaster position="bottom-center" richColors />
+      </body>
     </html>
   );
 }

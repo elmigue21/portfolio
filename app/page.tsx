@@ -6,74 +6,94 @@ import {Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useEffect, useState /* ,useRef */} from "react";
 import InfiniteCarousel from "@/components/InfiniteCarousel";
 import { Skeleton } from "@/components/ui/skeleton";
-// import BubbleHoverButton from "@/components/BubbleWrapper";
 import BubbleWrapper from "@/components/BubbleWrapper";
+import { projects } from "@/constants/constants";
+import { orgs } from "@/constants/constants";
+import ChatScreen from "@/components/ChatScreen";
+import Link from "next/link";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { MdContentCopy } from "react-icons/md";
+import { copyToClipboard } from "@/lib/utils";
+
 export default function Home() {
 
   const fullText = "Welcome to my Portfolio!"
   const [welcome,setWelcome] = useState("")
   const [index, setIndex] = useState(0);
-  const projects = [
-    {
-      name: "Dempa",
-      src: "/dempa.png",
-      desc: "",
-      srcAlt: "dempa logo",
-      techStacks: ["nextjs", "supabase", "reactjs",'expressjs','nodejs','git','github','tailwindcss'],
-    },
-    {
-      name: "Ypiresia Jireh",
-      src: "/yj.png",
-      desc: "",
-      srcAlt: "yj logo",
-      techStacks: ["nextjs", "mongodb", "reactjs",'tailwindcss'],
-    },
-    {
-      name: "The Sideshop",
-      src: "/sideshop.png",
-      desc: "",
-      srcAlt: "sideshop logo",
-      techStacks: ["nextjs", "mysql", "reactjs"],
-    },
-    {
-      name: "Bloo's Tales",
-      src: "/bloo.png",
-      desc: "",
-      srcAlt: "bloo",
-      techStacks: ["csharp"],
-    },
-    {
-      name: "Stratify",
-      src: "/bpi.png",
-      desc: "",
-      srcAlt: "stratify",
-      techStacks: ["nextjs", "mongodb", "reactjs"],
-    },
-    {
-      name: "Likagi",
-      src: "/likagi.png",
-      desc: "",
-      srcAlt: "likagi",
-      techStacks: ["vue"],
-    },
-    {
-      name: "Kaboom",
-      src: "/kaboom.png",
-      desc: "",
-      srcAlt: "kaboom",
-      techStacks: ["javascript"],
-    },
-  ];
+  // const projects = [
+  //   {
+  //     name: "Dempa",
+  //     src: "/dempa.png",
+  //     desc: "",
+  //     srcAlt: "dempa logo",
+  //     techStacks: ["nextjs", "supabase", "reactjs",'expressjs','nodejs','git','github','tailwindcss'],
+  //   },
+  //   {
+  //     name: "Ypiresia Jireh",
+  //     src: "/yj.png",
+  //     desc: "",
+  //     srcAlt: "yj logo",
+  //     techStacks: ["nextjs", "mongodb", "reactjs",'tailwindcss'],
+  //   },
+  //   {
+  //     name: "The Sideshop",
+  //     src: "/sideshop.png",
+  //     desc: "",
+  //     srcAlt: "sideshop logo",
+  //     techStacks: ["nextjs", "mysql", "reactjs"],
+  //   },
+  //   {
+  //     name: "Bloo's Tales",
+  //     src: "/bloo.png",
+  //     desc: "",
+  //     srcAlt: "bloo",
+  //     techStacks: ["csharp"],
+  //   },
+  //   {
+  //     name: "Stratify",
+  //     src: "/bpi.png",
+  //     desc: "",
+  //     srcAlt: "stratify",
+  //     techStacks: ["nextjs", "mongodb", "reactjs"],
+  //   },
+  //   {
+  //     name: "Likagi",
+  //     src: "/likagi.png",
+  //     desc: "",
+  //     srcAlt: "likagi",
+  //     techStacks: ["vue"],
+  //   },
+  //   {
+  //     name: "Kaboom",
+  //     src: "/kaboom.png",
+  //     desc: "",
+  //     srcAlt: "kaboom",
+  //     techStacks: ["javascript"],
+  //   },
+  // ];
 
-  const orgs = [
-    { name: "Adamson Computer Science Society",role:"Logistics Director", src: "acomss.jpg" },
-    { name: "Amazon Web Services Cloud Club Philippines", role:"Technology Department Frontend Developer",src: "awscc.jpg" },
+  // const orgs = [
+  //   { name: "Adamson Computer Science Society",role:"Logistics Director", src: "acomss.jpg" },
+  //   { name: "Amazon Web Services Cloud Club Philippines", role:"Technology Department Frontend Developer",src: "awscc.jpg" },
+  // ];
+
+  const contacts = [
+    {
+      image: "/images/contact/github.png",
+      link: "https://github.com/elmigue21",
+      text: "https://github.com/elmigue21",
+    },
+    {
+      image: "/images/contact/linkedin.jpg",
+      link: "https://www.linkedin.com/in/mj-caacbay/",
+      text: "https://www.linkedin.com/in/mj-caacbay/",
+    },
   ];
 
 
   useEffect(() => {
     if (index < fullText.length) {
-      console.log("index:", index, "length:", welcome.length);
+      // console.log("index:", index, "length:", welcome.length);
       const timeout = setTimeout(() => {
         setWelcome((prev) => prev + fullText[index] + "");
         setIndex(index + 1);
@@ -83,7 +103,8 @@ export default function Home() {
   }, [index, fullText, welcome.length]);
 
   return (
-    <div className="bg-slate-900 flex items-center justify-center h-full flex-col">
+    <div className="bg-slate-900 flex items-center justify-center h-full flex-col w-full overflow-x-hidden">
+      <ChatScreen />
       <Avatar className="w-24 sm:w-40 md:w-80 xl:w-80 m-5 aspect-square flex items-center justify-center">
         <AvatarImage
           src="/images/self.jpg"
@@ -93,14 +114,14 @@ export default function Home() {
           <Skeleton className="w-full h-full rounded-full bg-white" />
         </AvatarFallback>
       </Avatar>
-      <h1 className="2xl:text-9xl text-lalezar text-white">
+      <h1 className="2xl:text-6xl text-lalezar text-white">
         {welcome.substring(0, index)}
         {index < fullText.length && (
           <motion.span
             className="inline-block w-[0.6ch] text-white text-center"
             animate={{ opacity: [0, 1] }}
             transition={{
-              duration: 0.2, // lower = faster blink
+              duration: 0.2,
               repeat: Infinity,
               repeatType: "reverse",
             }}
@@ -112,9 +133,17 @@ export default function Home() {
       <h1 className="text-white font-lalezar  text-3xl sm:text-5xl 2xl:text-9xl text-center">
         MIGUEL JOHN CAACBAY
       </h1>
-      <h2 className="text-white font-lalezar text-2xl sm:text-4xl 2xl:text-8xl text-center">
+      <motion.h2
+        className="text-white font-lalezar text-2xl sm:text-4xl 2xl:text-8xl text-center"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          ease: "easeInOut",
+          duration: 0.5,
+        }}
+      >
         FULL STACK DEVELOPER
-      </h2>
+      </motion.h2>
       {/* <BubbleHoverButton /> */}
       <div className="w-full bg-sky-800 py-2 my-2">
         <h3 className=" text-white 2xl:text-3xl font-lalezar">
@@ -152,7 +181,7 @@ export default function Home() {
                 </motion.div>
 
                 <div className="flex items-center justify-center flex-1 border-2 border-sky-800 m-2 rounded-2xl font-lalezar">
-                  <h2 className="2xl:text-5xl">{project.name}</h2>
+                  <h2 className="text-xl md:text-5xl">{project.name}</h2>
                 </div>
               </div>
             </BubbleWrapper>
@@ -165,14 +194,14 @@ export default function Home() {
           ORGANIZATIONAL EXPERIENCE
         </h3>
       </div>
-      <div className="flex">
+      <div className="flex flex-wrap justify-center">
         {orgs.map((org, index) => {
           return (
             <div
-              className="bg-white w-[40vw] h-40 border-8 gap-3 m-5 flex items-center border-sky-800"
+              className="bg-whte w-full bg-white h-40 border-8 gap-3 m-5 flex items-center border-sky-800 p-2"
               key={index}
             >
-              <motion.div className="relative h-32 w-32 rounded-full overflow-hidden">
+              <motion.div className="relative h-20 w-20 md:h-32 md:w-32 rounded-full overflow-hidden">
                 <Image
                   src={`/images/orgs/${org.src}`}
                   alt="asdasd"
@@ -181,19 +210,42 @@ export default function Home() {
                 />
               </motion.div>
               <span className="flex-1">
-                <h3 className="font-lalezar text-5xl">{org.name}</h3>
-                <h4 className="">{org.role}</h4>
+                <h3 className="font-lalezar text-xl md:text-3xl">{org.name}</h3>
+                <h4 className="text-md md:text-xl">{org.role}</h4>
               </span>
             </div>
           );
         })}
       </div>
       <div className="w-full bg-sky-800 py-2 my-2">
-        <h3 className=" text-white 2xl:text-3xl font-lalezar">LINKS & CONTACTS</h3>
+        <h3 className=" text-white 2xl:text-3xl font-lalezar">
+          LINKS & CONTACTS
+        </h3>
         {/* <h1 style={{ fontFamily: "Lalezar, cursive" }}>Does this work?</h1> */}
       </div>
 
-      
+      <div className="flex gap-10 m-10 overflow-hidden flex-col">
+        {contacts.map((contact, index) => (
+          <div
+            key={index}
+            // href={contact.link}
+            className="flex bg-sky-800 border-white border-2 transition-all duration-100 p-5"
+          >
+            <div className="relative w-10 h-10 rounded-full overflow-hidden">
+              <Image src={contact.image} alt="" fill />
+            </div>
+            <h2 className="flex-1 p-2 text-white">{contact.text}</h2>
+            {contact.link ? (
+              <Link href={contact.link}>
+                <FaExternalLinkAlt className="text-slate-300 hover:text-black hover:cursor-pointer" />
+              </Link>
+            ) : (
+              <MdContentCopy onClick={()=>{copyToClipboard(contact.text)}} className="text-slate-300 hover:text-black hover:cursor-pointer" />
+            )}
+          </div>
+          // <SpinUrl key={index} image={contact.image} link={contact.link} text={contact.text}/>
+        ))}
+      </div>
     </div>
   );
 }

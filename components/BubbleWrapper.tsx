@@ -34,7 +34,7 @@ export default function BubbleWrapper({
 
   return (
     <div
-      className="relative inline-block"
+      className="relative w-full sm:w-3/4 md:w-[500px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
