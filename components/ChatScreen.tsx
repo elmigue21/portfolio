@@ -19,14 +19,10 @@ const ChatScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [streaming, setStreaming] = useState(false);
-  // const [messageCount , setMessageCount] = useState(0);
+
 
  const chatRef = useRef(null);
-  // const scrollToBottom = () => {
-  //   if (chatRef.current) {
-  //     chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  //   }
-  // };
+
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message]);
@@ -49,10 +45,10 @@ const ChatScreen = () => {
 
   const updateLastMessage = (newMessage: string) => {
     setMessages((prev) => {
-      if (prev.length === 0) return prev; // no messages yet
+      if (prev.length === 0) return prev; 
       return [
-        ...prev.slice(0, -1), // keep everything except last
-        { ...prev[prev.length - 1], message: newMessage }, // replace last
+        ...prev.slice(0, -1), 
+        { ...prev[prev.length - 1], message: newMessage }, 
       ];
     });
   };
@@ -62,8 +58,8 @@ const ChatScreen = () => {
     addMessage({ message: inputVal, isUser: true, id: messages.length });
 
     try {
-      const response = await fetch("http://localhost:8000/ask", {
-        method: "POST", // or GET depending on your server
+      const response = await fetch("/api/ask", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -80,7 +76,6 @@ const ChatScreen = () => {
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-      //  let result = "";
 
       while (true) {
         const { done, value } = await reader.read();
@@ -93,21 +88,14 @@ const ChatScreen = () => {
           throw new Error(parsed.error || "Unknown server error");
         }
 
-        //  result += chunk;
         appendToLastMessage(chunk);
-        console.log("Streamed chunk:", chunk); // <- here’s your partial AI output
+        console.log("Streamed chunk:", chunk); 
       }
       setStreaming(false);
-      // scrollToBottom();
+
     } catch (e) {
       console.error(e);
-      //  addMessage({
-      //    message: `[Error] ${
-      //      e instanceof Error ? e.message : "Unknown error occurred."
-      //    }`,
-      //    isUser: false,
-      //    id: messages.length,
-      //  });
+
       updateLastMessage("Something went wrong. Please try again later.");
 
       setStreaming(false);
@@ -119,7 +107,7 @@ const ChatScreen = () => {
 
   useEffect(() => {
     console.log("pop up");
-    // Start with pop-up
+
     controls.start({
       scale: 1,
       x: -200,
@@ -127,7 +115,7 @@ const ChatScreen = () => {
       transition: { type: "spring", stiffness: 300, damping: 20 },
     });
 
-    // After 10s, go back to initial
+
     const timer = setTimeout(() => {
       controls.start({
         scale: 0.5,
@@ -145,7 +133,7 @@ const ChatScreen = () => {
       setStreaming(true);
 
       try {
-        const response = await fetch("http://localhost:8000/ask", {
+        const response = await fetch("/api/ask", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -206,7 +194,7 @@ const ChatScreen = () => {
         >
           <TiMessages className="scale-300" />
           <motion.div
-            // initial={{x:0,scaleX:0,scaleY:0}}
+
             initial={{ scale: 0, opacity: 0 }}
             animate={controls}
             className="absolute bg-blue-500 rounded-t-full rounded-bl-full text-2xl p-5 text-nowrap"
@@ -216,14 +204,14 @@ const ChatScreen = () => {
         </motion.div>
       )}
       <motion.div
-        // className="z-99 relative"
+
         className={` bottom-0 bg-slate-800 z-99 relative right-0 w-full h-full shadow-lg overflow-hidden ${
           isOpen ? "rounded" : "rounded-xl"
         }`}
         initial={{
-          scale: 0.3, // small size
-          x: "100%", // off-screen to right
-          y: "100%", // off-screen to bottom
+          scale: 0.3, 
+          x: "100%", 
+          y: "100%", 
           opacity: 0,
         }}
         animate={

@@ -104,7 +104,7 @@ export default function Home() {
 
   return (
     <div className="bg-slate-900 flex items-center justify-center h-full flex-col w-full overflow-x-hidden">
-      {/* <ChatScreen /> */}
+      <ChatScreen />
       <Avatar className="w-24 sm:w-40 md:w-80 xl:w-80 m-5 aspect-square flex items-center justify-center">
         <AvatarImage
           src="/images/self.jpg"
