@@ -4,9 +4,16 @@ import { techStacks, projects, orgs, jobs } from "@/constants/constants";
 import { Ratelimit } from "@upstash/ratelimit";
 import { redis } from "@/lib/redis";
 
+
+
+
 const ratelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.fixedWindow(5, "10 s"),
+});
+const dailyLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.fixedWindow(15, "24 h"),
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,6 +40,12 @@ export async function POST(req: NextRequest) {
         const { success } = await ratelimit.limit(ip);
         if (!success) {
           return new Response("Too many requests. Please wait.", {
+            status: 429,
+          });
+        }
+        const daily = await dailyLimiter.limit(ip);
+        if (!daily.success) {
+          return new Response("Daily limit reached. Try again tomorrow.", {
             status: 429,
           });
         }
