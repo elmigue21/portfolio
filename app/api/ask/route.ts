@@ -1,6 +1,13 @@
 import { NextRequest } from "next/server";
 import { aiClient } from "@/server/ai/groq";
 import { techStacks, projects, orgs, jobs } from "@/constants/constants";
+import { Ratelimit } from "@upstash/ratelimit";
+import { redis } from "@/lib/redis";
+
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.fixedWindow(5, "10 s"),
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function jsonToText(obj: any, indent = 0): string {
@@ -20,6 +27,18 @@ function jsonToText(obj: any, indent = 0): string {
 
 export async function POST(req: NextRequest) {
   try {
+
+        const ip = req.headers.get("x-forwarded-for") ?? "unknown";
+
+        const { success } = await ratelimit.limit(ip);
+        if (!success) {
+          return new Response("Too many requests. Please wait.", {
+            status: 429,
+          });
+        }
+
+
+
     const { prompt } = await req.json();
 
     const stream = await aiClient.chat.completions.create({
