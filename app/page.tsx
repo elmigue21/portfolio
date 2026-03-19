@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import BubbleWrapper from "@/components/BubbleWrapper";
 import { projects } from "@/constants/constants";
 import { orgs } from "@/constants/constants";
-import ChatScreen from "@/components/ChatScreen";
+// import ChatScreen from "@/components/ChatScreen";
 import Link from "next/link";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { MdContentCopy } from "react-icons/md";
