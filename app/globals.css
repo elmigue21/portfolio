@@ -129,3 +129,172 @@
     @apply bg-background text-foreground;
   }
 } */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Constant background loops run as CSS animations so they stay on the GPU
+   instead of ticking through JavaScript every frame. */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes snippet-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.animate-orbit {
+  animation: orbit-spin 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-spin 40s linear infinite reverse;
+  will-change: transform;
+}
+
+.animate-drift {
+  animation: snippet-drift 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit,
+  .animate-orbit-reverse,
+  .animate-drift {
+    animation: none;
+  }
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Theme: dark by default; html.light switches the whole palette.      */
+/* Components use these variables (bg-(--surface) etc.) and the remapped */
+/* Tailwind colors below, so one class flips every section at once.    */
+/* ------------------------------------------------------------------ */
+:root {
+  --page: #070b1f;
+  --deep: #050a1f;
+  --panel: #070d24;
+  --surface: #0a1433;
+  --surface-2: #0f1d45;
+  --surface-3: #13285e;
+  --night: #081232;
+  /* Brand marks that are black (Next.js, Express, GitHub) show white on dark. */
+  --icon-mono: #ffffff;
+  /* Work Experience sky behind the building. */
+  --sky-top: #030716;
+  --sky-mid: #0a1433;
+  --sky-bottom: #0e1f4a;
+  color-scheme: dark;
+}
+
+html.light {
+  --page: #eef6ff;
+  --deep: #f7fbff;
+  --panel: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #e3f0ff;
+  --surface-3: #c7defa;
+  --night: #d6e8fb;
+  --icon-mono: #0b1b3f;
+  --sky-top: #9fd3fb;
+  --sky-mid: #cfe8fd;
+  --sky-bottom: #eef6ff;
+  color-scheme: light;
+
+  /* Light text and accents become deep navy and stronger blues. */
+  --color-white: #0b1b3f;
+  --color-sky-50: #0b1b3f;
+  --color-sky-100: #1e3a6b;
+  --color-sky-200: #1d4f91;
+  --color-sky-300: #0369a1;
+  --color-sky-400: #0284c7;
+  --color-slate-300: #475569;
+  --color-slate-400: #64748b;
+  --color-slate-900: #ffffff;
+  --color-emerald-300: #047857;
+  --color-red-300: #dc2626;
+}
+
+/* Spots that stay dark in both themes: the terminal window and closed hallway doors. */
+.force-dark {
+  --page: #070b1f;
+  --deep: #050a1f;
+  --panel: #070d24;
+  --surface: #0a1433;
+  --surface-2: #0f1d45;
+  --surface-3: #13285e;
+  --night: #081232;
+  --icon-mono: #ffffff;
+  --color-white: #ffffff;
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-200: #bae6fd;
+  --color-sky-300: #7dd3fc;
+  --color-sky-400: #38bdf8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-900: #0f172a;
+  --color-emerald-300: #6ee7b7;
+  --color-red-300: #fca5a5;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--page);
+}
+
+/* Tailwind's reset gives buttons the default arrow; show the hand instead. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+summary {
+  cursor: pointer;
+}
+
+/* Extra-curricular hallway surfaces. */
+:root {
+  --hall-wall-a: #0c1a3d;
+  --hall-wall-b: #081232;
+  --hall-line: rgba(56, 189, 248, 0.1);
+  --hall-grid: rgba(56, 189, 248, 0.12);
+  --hall-grid-soft: rgba(56, 189, 248, 0.08);
+  --hall-floor: #060d26;
+  --hall-light: rgba(125, 211, 252, 0.55);
+  --hall-ceiling: #07102b;
+  --hall-fog: rgba(5, 10, 31, 0.85);
+  --door-face-a: #0f2a63;
+  --door-face-b: #0a1433;
+}
+
+html.light {
+  --hall-wall-a: #dcebfc;
+  --hall-wall-b: #c6dcf6;
+  --hall-line: rgba(2, 132, 199, 0.18);
+  --hall-grid: rgba(2, 132, 199, 0.18);
+  --hall-grid-soft: rgba(2, 132, 199, 0.1);
+  --hall-floor: #e9f3fe;
+  --hall-light: rgba(56, 189, 248, 0.7);
+  --hall-ceiling: #f5f9ff;
+  --hall-fog: rgba(238, 246, 255, 0.85);
+  --door-face-a: #ffffff;
+  --door-face-b: #e3f0ff;
+}
+
+/* Window-frame lines on the Work Experience job panels. */
+:root {
+  --mullion: rgba(19, 40, 94, 0.9);
+}
+html.light {
+  --mullion: rgba(2, 132, 199, 0.1);
+}

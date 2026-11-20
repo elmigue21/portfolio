@@ -64,14 +64,15 @@ export const techStacks = [
  export const projects = [
   {
     name:'Portfolio',
-    src:'/self.jpg',
+    src:'/portfolio.svg',
     srcAlt:'portfolio',
     techStacks:[
       'nextjs','expressjs','nodejs','groq'
     ]
     ,
     descriptions:[
-      'AI Chatbot using groq with Llama model'
+      'Interactive portfolio with scroll-driven 3D, physics and a light/dark theme',
+      'Built Migu, an AI agent that answers questions and navigates the page, with Groq and Gemini as fallbacks'
     ]
   },
     {
@@ -91,16 +92,15 @@ export const techStacks = [
       ],
       descriptions:[
 
-        'I was the lead developer and lead backend developer',
-        'We were a group of 5',
-        'Integrated email sending for newsletter using nodemailer',
+        'Lead developer and lead backend developer on a team of 5',
+        'Built newsletter email sending with Nodemailer',
         'Added admin controls for employee management',
-        'Used Supabase Auth for authentication',
-        'Integrated printing of reports and import/export of excel files',
-        'Utilized Tanstack React Query for efficient pagination of over 40,000 subscribers',
-        'Implemented limiter for requests',
-        'Used typescript for more readable code and proper data typing',
-        'Deployed via vercel'
+        'Set up authentication with Supabase Auth',
+        'Added report printing and Excel import/export',
+        'Paginated 40,000+ subscribers efficiently with TanStack Query',
+        'Added request rate limiting',
+        'Wrote it in TypeScript for safer, more readable code',
+        'Deployed on Vercel'
 
       ]
     },
@@ -111,10 +111,10 @@ export const techStacks = [
       srcAlt: "yj logo",
       techStacks: ["nextjs", "mongodb", "reactjs", "tailwindcss"],
       descriptions:[
-        'Implemented RESTful API using Express.js',
-        'Rolled JWT-based auth for secure access',
-        'Utilized Redux for efficient state management across components',
-        'Used typescript for more readable code and proper data typing'
+        'Built a RESTful API with Express.js',
+        'Implemented JWT-based authentication',
+        'Managed app-wide state with Redux',
+        'Wrote it in TypeScript for safer, more readable code'
       ]
     },
     {
@@ -122,11 +122,11 @@ export const techStacks = [
       src: "/sideshop.png",
       desc: "",
       srcAlt: "sideshop logo",
-      techStacks: ["nextjs", "mysql", "reactjs"],
-      descriptions:["Used Laravel's MVC pattern for scalability",
-        'Implemented RESTful API using Laravel',
-        'Responsive designs for pages',
-        'Created tables for users, carts, and products using MySQL'
+      techStacks: ["laravel", "mysql", "reactjs"],
+      descriptions:["Structured the app with Laravel's MVC pattern for scalability",
+        'Built a RESTful API in Laravel',
+        'Designed responsive pages',
+        'Modeled users, carts and products in MySQL'
       ]
     },
     {
@@ -136,10 +136,9 @@ export const techStacks = [
       srcAlt: "bloo",
       techStacks: ["csharp"],
       descriptions:[
-        'Lead backend developer',
-        'We were a group of 8',
-        'Created classes for characters, skills, status effects',
-        'Applied OOP Concepts for reusability and clean code',
+        'Lead backend developer on a team of 8',
+        'Created classes for characters, skills and status effects',
+        'Applied OOP principles for reusable, clean code',
         ''
       ]
     },
@@ -150,10 +149,9 @@ export const techStacks = [
       srcAlt: "stratify",
       techStacks: ["nextjs", "mongodb", "reactjs"],
       descriptions:[
-        'Business Assistant Website for MSMEs using groq for prompts and chartjs for creating user-friendly visualization of data',
-        'This was made as a project for the BPI Datawave 2024',
-        'I was the Lead developer',
-        'We were a group of 4'
+        'Business assistant website for MSMEs, using Groq for AI prompts and Chart.js for clear data visualizations',
+        'Built for BPI DataWave 2024',
+        'Lead developer on a team of 4',
       ]
     },
     {
@@ -163,11 +161,10 @@ export const techStacks = [
       srcAlt: "likagi",
       techStacks: ["vue"],
       descriptions:[
-        'A Membership website built using vue and firebase',
-        'has posts functionality',
-        'has live a messaging system',
-        'uses firebase auth',
-        'has responsive design',
+        'Membership website built with Vue and Firebase',
+        'Posts and a live messaging system',
+        'Firebase Authentication',
+        'Responsive design',
       ],
     },
     {
@@ -181,22 +178,23 @@ export const techStacks = [
 
  export const orgs = [
     {
+      name: "Startup QC — Verdalyx Technologies",
+      role: "Team Member · Silver Awardee",
+      src: "startupqc.jpg",
+      descriptions:[
+        'Startup QC Student Competition, Squad 3 (Sep 2026), by the Quezon City Government',
+        'One of 11 Silver Awardees, among 47 winning teams from 153 applicants nationwide',
+        'Pitched Verdalyx Technologies with a five-person team from Adamson University\'s Computer Science Department',
+      ]
+    },
+    {
       name: "Adamson Computer Science Society 24-25",
       role: "Logistics Director",
       src: "acomss.jpg",
       descriptions:[
         'Created floor plans for events',
-        'Communicated with offices regarding equipments and venues',
+        'Coordinated with university offices on equipment and venues',
       ]
-    },
-    {
-      name:'Adamson Computer Science Society 25-26',
-      role:'Website Head',
-      src:'acomss.jpg',
-      descriptions:[
-        ''
-      ]
-
     },
     // {
     //   name: "Amazon Web Services Cloud Club Philippines",
@@ -209,16 +207,67 @@ export const techStacks = [
   ];
 
   export const jobs = [
+    {name:'Hirolabz',
+      role:'Junior Developer',
+      src:'',
+      start:'2026-06',
+      descriptions:[]
+    },
     {name:'Flowerstore.ph',
       role:'Mobile Application Developer Intern',
       src:'',
+      end:'2026-01',
       descriptions:[
-        'Worked on integrating payment functionality such as polling',
-        'Integrated ReactNative mapbox',
-        'Worked on creating stores for mapbox component use',
-        'Created queries for mapbox and payment features',
-        
+        'Integrated payment features, including payment status polling',
+        'Integrated Mapbox maps in React Native',
+        'Built state stores for the Mapbox components',
+        'Wrote queries for the map and payment features',
+
       ]
     }
 
+  ]
+
+  // Tech Stack section groups (keys match components/TechIcon.tsx).
+  export const stackCategories = {
+    frontend: ["nextjs", "reactjs", "typescript", "javascript", "tailwind", "vue"],
+    backend: ["nodejs", "expressjs", "supabase", "firebase", "mongodb", "mysql", "laravel", "csharp"],
+    tools: ["git", "github"],
+  }
+
+  // Kept from the old Links & Contacts section for when it is rebuilt.
+  export const contacts = [
+    {
+      name: "GitHub",
+      link: "https://github.com/elmigue21",
+      text: "https://github.com/elmigue21",
+    },
+    {
+      name: "LinkedIn",
+      link: "https://www.linkedin.com/in/mj-caacbay/",
+      text: "https://www.linkedin.com/in/mj-caacbay/",
+    },
+  ]
+
+  // Floating code fragments for the 3D projects background.
+  export const aboutSnippets = [
+    'const hardworking = true;',
+    'function work() {\n  return "Junior Developer";\n}',
+    'const company = "Hirolabz"; // since June 2026',
+    'const school = "Adamson University";',
+    'const course = "BS Computer Science";',
+    'const focus = "Data Science";',
+    'const stack = ["Next.js", "React", "Node.js", "TypeScript"];',
+    'experience.push("FlowerStore.ph — Mobile Dev Intern"); // until Jan 2026',
+    'orgs.push("ACOMSS — Logistics Director");',
+    'awards.push("Startup QC — Silver Awardee");',
+    'const location = "Philippines";',
+    'while (learning) { build(); }',
+    'if (bug) fix(bug);',
+    'const mobile = "React Native";',
+    'console.log("Hello, world!");',
+    'git commit -m "ship it"',
+    'npm run build',
+    'export default Miguel;',
+    'const coffee = Infinity;',
   ]
