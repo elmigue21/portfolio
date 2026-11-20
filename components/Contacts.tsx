@@ -30,6 +30,7 @@ const SECTIONS: Record<string, NavSection> = {
   stack: "tech-stack",
   projects: "projects",
   work: "work-experience",
+  education: "education",
   activities: "extracurricular",
 };
 
@@ -39,7 +40,7 @@ const HELP: Line[] = [
   { kind: "out", text: "  github      open my GitHub" },
   { kind: "out", text: "  linkedin    open my LinkedIn" },
   { kind: "out", text: "  ls          list the sections of this site" },
-  { kind: "out", text: "  projects    jump to my projects (also: stack, work, activities)" },
+  { kind: "out", text: "  projects    jump to my projects (also: stack, work, education, activities)" },
   { kind: "out", text: "  clear       clear the screen" },
 ];
 
@@ -76,7 +77,7 @@ function run(input: string): Line[] | "clear" {
   if (cmd === "github") return open("GitHub");
   if (cmd === "linkedin") return open("LinkedIn");
   if (cmd === "ls")
-    return [{ kind: "out", text: "stack/  projects/  work/  activities/  contact.sh" }];
+    return [{ kind: "out", text: "stack/  projects/  work/  education/  activities/  contact.sh" }];
   if (["contact.sh", "./contact.sh", "sh contact.sh", "bash contact.sh", "cat contact.sh"].includes(cmd))
     return [
       { kind: "out", text: "Reach Miguel here:" },

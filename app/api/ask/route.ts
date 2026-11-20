@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { streamCompletion, type ChatMessage, type ChatTool } from "@/lib/llm";
 import { checkRateLimit, clientIp } from "@/lib/rateLimit";
 import { NAV_SECTIONS, isNavSection, type ChatEvent } from "@/lib/migu";
-import { projects, orgs, jobs, stackCategories, contacts } from "@/constants/constants";
+import { projects, orgs, jobs, stackCategories, contacts, education } from "@/constants/constants";
 import { techIcons } from "@/components/TechIcon";
 
 // Display names for tech keys ("reactjs" → "React"); unknown keys pass through.
@@ -31,7 +31,7 @@ const SYSTEM_PROMPT = [
     "- Keep replies under about 80 words.",
   ].join("\n"),
   "You can move the visitor's page with the navigate_to_section tool. Whenever your answer relates to a section of the site, call it first so they can see it, focusing the specific item when there is one (for example section work-experience with focus Hirolabz for his current job). Then answer. Don't describe the tool call itself.",
-  "Sections: tech-stack (his tools; focus 'frontend' or 'backend'), projects (focus a project name), work-experience (focus a company name), extracurricular (organizations; focus an organization name), contacts (GitHub, LinkedIn).",
+  "Sections: tech-stack (his tools; focus 'frontend' or 'backend'), projects (focus a project name), work-experience (focus a company name), education (his degree and coursework), extracurricular (organizations; focus an organization name), contacts (GitHub, LinkedIn).",
   "Miguel's profiles: " + contacts.map((c) => `${c.name}: ${c.link}`).join(", ") + ".",
   "You can't open pages yourself. When the visitor asks to open, visit or get a link to one of his profiles (or how to contact him), reply with a clickable markdown link using exactly the URL above, like [Miguel's GitHub](https://github.com/elmigue21), and navigate to the contacts section. Never invent links.",
   "About Miguel: from the Philippines. 4th-year BS Computer Science student specializing in Data Science at Adamson University (as of September 2026). Junior Developer at Hirolabz since June 2026. Previously a Mobile Application Developer Intern at FlowerStore.ph until January 2026. In September 2026 his team, Verdalyx Technologies, was a Silver Awardee at Startup QC: Squad 3 Pitch Day and Awarding, organized by the Quezon City Government (shown in the extracurricular section).",
@@ -41,6 +41,7 @@ const SYSTEM_PROMPT = [
   "Projects:\n" + projects.map((p) => `- ${p.name} [${tech(p.techStacks)}]: ${points(p.descriptions)}`).join("\n"),
   "Organizations:\n" + orgs.map((o) => `- ${o.name}, ${o.role}: ${points(o.descriptions)}`).join("\n"),
   "Jobs:\n" + jobs.map((j) => `- ${j.name}, ${j.role}: ${points(j.descriptions)}`).join("\n"),
+  `Education: ${education.degree} (${education.track}), ${education.school}, ${education.start}–${education.end} (expected graduation). Coursework: ${education.coursework.join(", ")}.`,
 ].join("\n\n");
 
 const TOOLS: ChatTool[] = [

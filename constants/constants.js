@@ -235,6 +235,21 @@ export const techStacks = [
     tools: ["git", "github"],
   }
 
+  // Education section (the student ID card).
+  export const education = {
+    school: "Adamson University",
+    degree: "BS Computer Science",
+    track: "Data Science",
+    start: "2023",
+    end: "2027",
+    coursework: [
+      "Machine Learning",
+      "Data Structures & Algorithms",
+      "Database Systems",
+      "Software Engineering",
+    ],
+  }
+
   // Kept from the old Links & Contacts section for when it is rebuilt.
   export const contacts = [
     {

@@ -5,6 +5,7 @@ export const NAV_SECTIONS = [
   "tech-stack",
   "projects",
   "work-experience",
+  "education",
   "extracurricular",
   "contacts",
 ] as const;
@@ -14,6 +15,7 @@ export const SECTION_LABELS: Record<NavSection, string> = {
   "tech-stack": "Tech Stack",
   projects: "Projects",
   "work-experience": "Work Experience",
+  education: "Education",
   extracurricular: "Extra-Curricular Activities",
   contacts: "Links & Contacts",
 };

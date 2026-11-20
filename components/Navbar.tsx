@@ -15,6 +15,7 @@ export const navSections: { id: NavSection; label: string }[] = [
   { id: "tech-stack", label: "Tech Stack" },
   { id: "projects", label: "Projects" },
   { id: "work-experience", label: "Work Experience" },
+  { id: "education", label: "Education" },
   { id: "extracurricular", label: "Extra-Curricular Activities" },
   { id: "contacts", label: "Links & Contacts" },
 ];
